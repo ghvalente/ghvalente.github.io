@@ -1,49 +1,53 @@
 # CLAUDE.md
 
-## Project Overview
+## Preferências de Comunicação
 
-This is Gustavo Valente's personal GitHub Pages website hosted at [gustavovalente.com](https://gustavovalente.com).
+- **Idioma**: Sempre responder em Português do Brasil
 
-## Technology Stack
+## Visão Geral do Projeto
 
-- **Platform**: GitHub Pages
-- **Static Site Generator**: Jekyll
-- **Theme**: jekyll-theme-minimal
+Site pessoal de Gustavo Valente hospedado no GitHub Pages em [gustavovalente.com](https://gustavovalente.com).
 
-## Project Structure
+## Stack Tecnológica
+
+- **Plataforma**: GitHub Pages
+- **Gerador de Site Estático**: Jekyll
+- **Tema**: jekyll-theme-minimal
+
+## Estrutura do Projeto
 
 ```
 /
-├── _config.yml    # Jekyll configuration
-├── CNAME          # Custom domain configuration
-├── index.md       # Main homepage content
-└── CLAUDE.md      # This file
+├── _config.yml    # Configuração do Jekyll
+├── CNAME          # Configuração do domínio personalizado
+├── index.md       # Conteúdo da página principal
+└── CLAUDE.md      # Este arquivo
 ```
 
-## Development
+## Desenvolvimento
 
-### Local Development
+### Desenvolvimento Local
 
-To run locally with Jekyll:
+Para rodar localmente com Jekyll:
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-Then visit `http://localhost:4000`
+Depois acesse `http://localhost:4000`
 
-### Adding Content
+### Adicionando Conteúdo
 
-- Edit `index.md` to update the homepage
-- Add new `.md` files for additional pages
-- Jekyll will automatically process Markdown files with front matter
+- Edite `index.md` para atualizar a página principal
+- Adicione novos arquivos `.md` para páginas adicionais
+- O Jekyll processa automaticamente arquivos Markdown com front matter
 
-### Configuration
+### Configuração
 
-- `_config.yml` - Jekyll settings and theme configuration
-- `CNAME` - Custom domain (gustavovalente.com)
+- `_config.yml` - Configurações do Jekyll e do tema
+- `CNAME` - Domínio personalizado (gustavovalente.com)
 
-## Deployment
+## Deploy
 
-Changes pushed to the main branch are automatically deployed via GitHub Pages.
+Alterações enviadas para a branch principal são automaticamente publicadas via GitHub Pages.
