@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cia G3 – Intranet</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --sp-blue:       #0078d4;
+      --sp-blue-dark:  #005a9e;
+      --sp-blue-light: #e6f2fb;
+      --sp-teal:       #00b7c3;
+      --sp-bg:         #f3f2f1;
+      --sp-surface:    #ffffff;
+      --sp-border:     #edebe9;
+      --sp-text:       #323130;
+      --sp-text-muted: #605e5c;
+      --sp-radius:     8px;
+      --sp-shadow:     0 2px 8px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: var(--sp-bg);
+      color: var(--sp-text);
+      margin: 0;
+    }
+
+    a { color: var(--sp-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Top Navigation ───────────────────────────────────── */
+    .topnav {
+      background: var(--sp-blue);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    }
+
+    .topnav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .topnav-brand .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--sp-blue);
+      font-size: .85rem;
+    }
+
+    .topnav-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,.35);
+    }
+
+    .topnav-search {
+      flex: 1;
+      max-width: 340px;
+      position: relative;
+    }
+
+    .topnav-search input {
+      width: 100%;
+      height: 32px;
+      border: none;
+      border-radius: 4px;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      padding: 0 12px 0 36px;
+      font-size: .875rem;
+      outline: none;
+      transition: background .2s;
+    }
+
+    .topnav-search input::placeholder { color: rgba(255,255,255,.75); }
+    .topnav-search input:focus { background: rgba(255,255,255,.3); }
+
+    .topnav-search i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,.8);
+      font-size: .8rem;
+    }
+
+    .topnav-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topnav-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      transition: background .2s;
+    }
+
+    .topnav-icon-btn:hover { background: rgba(255,255,255,.3); }
+
+    .topnav-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--sp-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .8rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ─── Sub Navigation ───────────────────────────────────── */
+    .subnav {
+      background: var(--sp-surface);
+      border-bottom: 1px solid var(--sp-border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 44px;
+    }
+
+    .subnav-link {
+      padding: 0 14px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: .875rem;
+      color: var(--sp-text-muted);
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    .subnav-link:hover { color: var(--sp-blue); text-decoration: none; border-color: #c8c6c4; }
+    .subnav-link.active { color: var(--sp-blue); border-color: var(--sp-blue); font-weight: 600; }
+
+    /* ─── Hero Banner ──────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--sp-blue) 0%, #106ebe 60%, #005a9e 100%);
+      padding: 40px 24px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,.06);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: 120px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,.04);
+      border-radius: 50%;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .hero-greeting { font-size: .875rem; opacity: .85; margin-bottom: 4px; }
+    .hero-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 6px; }
+    .hero-subtitle { font-size: .95rem; opacity: .8; }
+
+    .hero-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: .8rem;
+      margin-top: 12px;
+    }
+
+    /* ─── Main Layout ──────────────────────────────────────── */
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    /* ─── Cards ────────────────────────────────────────────── */
+    .sp-card {
+      background: var(--sp-surface);
+      border-radius: var(--sp-radius);
+      box-shadow: var(--sp-shadow);
+      border: 1px solid var(--sp-border);
+      overflow: hidden;
+    }
+
+    .sp-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--sp-border);
+    }
+
+    .sp-card-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--sp-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .sp-card-title i {
+      color: var(--sp-blue);
+      font-size: 1rem;
+    }
+
+    .sp-card-link {
+      font-size: .8rem;
+      color: var(--sp-blue);
+    }
+
+    .sp-card-body { padding: 16px 20px; }
+
+    /* ─── Quick Links ──────────────────────────────────────── */
+    .quicklinks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 992px) { .quicklinks-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 576px) { .quicklinks-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .ql-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 8px;
+      border-radius: 6px;
+      background: var(--sp-bg);
+      border: 1px solid var(--sp-border);
+      transition: all .2s;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--sp-text);
+    }
+
+    .ql-item:hover {
+      background: var(--sp-blue-light);
+      border-color: var(--sp-blue);
+      color: var(--sp-blue);
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,120,212,.15);
+    }
+
+    .ql-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .ql-label { font-size: .75rem; font-weight: 600; line-height: 1.2; }
+
+    /* ─── News ─────────────────────────────────────────────── */
+    .news-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--sp-border);
+    }
+
+    .news-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .news-item:first-child { padding-top: 0; }
+
+    .news-thumb {
+      width: 80px;
+      height: 64px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--sp-blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sp-blue);
+      font-size: 1.5rem;
+    }
+
+    .news-body { flex: 1; min-width: 0; }
+
+    .news-cat {
+      font-size: .7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: .5px;
+      color: var(--sp-blue);
+      margin-bottom: 3px;
+    }
+
+    .news-title {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--sp-text);
+      margin-bottom: 4px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-title a { color: inherit; }
+    .news-title a:hover { color: var(--sp-blue); text-decoration: none; }
+
+    .news-meta {
+      font-size: .75rem;
+      color: var(--sp-text-muted);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .news-excerpt {
+      font-size: .8rem;
+      color: var(--sp-text-muted);
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ─── Birthdays ─────────────────────────────────────────── */
+    .birthday-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--sp-border);
+    }
+
+    .birthday-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .birthday-item:first-child { padding-top: 0; }
+
+    .bday-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .875rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .bday-info { flex: 1; min-width: 0; }
+    .bday-name { font-size: .875rem; font-weight: 600; }
+    .bday-dept { font-size: .75rem; color: var(--sp-text-muted); }
+
+    .bday-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--sp-blue-light);
+      border-radius: 6px;
+      padding: 4px 10px;
+      min-width: 40px;
+    }
+
+    .bday-date-day { font-size: 1.1rem; font-weight: 700; color: var(--sp-blue); line-height: 1; }
+    .bday-date-month { font-size: .65rem; font-weight: 600; color: var(--sp-blue); text-transform: uppercase; }
+
+    .bday-today .bday-date {
+      background: #fff3cd;
+    }
+    .bday-today .bday-date-day,
+    .bday-today .bday-date-month {
+      color: #856404;
+    }
+
+    .bday-badge {
+      background: #ffc107;
+      color: #000;
+      font-size: .65rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
+
+    .no-birthdays {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--sp-text-muted);
+      font-size: .875rem;
+    }
+
+    /* ─── Company Info ──────────────────────────────────────── */
+    .info-stat {
+      text-align: center;
+      padding: 12px;
+      background: var(--sp-bg);
+      border-radius: 6px;
+      border: 1px solid var(--sp-border);
+    }
+
+    .info-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--sp-blue); }
+    .info-stat-label { font-size: .75rem; color: var(--sp-text-muted); margin-top: 2px; }
+
+    .info-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--sp-border);
+      font-size: .875rem;
+    }
+
+    .info-contact-item:last-child { border-bottom: none; }
+    .info-contact-item i { width: 18px; color: var(--sp-blue); }
+
+    /* ─── Announcements Banner ──────────────────────────────── */
+    .announce-banner {
+      background: #fff4ce;
+      border: 1px solid #ffd966;
+      border-radius: var(--sp-radius);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .875rem;
+    }
+
+    .announce-banner i { color: #c19c00; font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ─── Section Heading ───────────────────────────────────── */
+    .section-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--sp-text-muted);
+      margin-bottom: 10px;
+    }
+
+    /* ─── Footer ────────────────────────────────────────────── */
+    footer {
+      background: var(--sp-surface);
+      border-top: 1px solid var(--sp-border);
+      padding: 20px 24px;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--sp-text-muted);
+      margin-top: 40px;
+    }
+
+    /* ─── Responsive tweaks ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      .topnav-search { display: none; }
+      .hero-title { font-size: 1.4rem; }
+      .subnav { overflow-x: auto; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ TOP NAVIGATION ═══════════════════════════════════════ -->
+  <nav class="topnav">
+    <div class="topnav-brand">
+      <div class="brand-logo">G3</div>
+      Cia G3
+    </div>
+    <div class="topnav-divider"></div>
+    <span style="color:rgba(255,255,255,.8);font-size:.875rem;white-space:nowrap;">Intranet</span>
+
+    <div class="topnav-search ms-3">
+      <i class="fa fa-search"></i>
+      <input type="text" placeholder="Pesquisar na intranet…" />
+    </div>
+
+    <div class="topnav-actions">
+      <button class="topnav-icon-btn" title="Notificações">
+        <i class="fa fa-bell"></i>
+      </button>
+      <button class="topnav-icon-btn" title="Configurações">
+        <i class="fa fa-gear"></i>
+      </button>
+      <div class="topnav-avatar" title="Meu Perfil">EU</div>
+    </div>
+  </nav>
+
+  <!-- ═══ SUB NAVIGATION ══════════════════════════════════════ -->
+  <nav class="subnav">
+    <a href="#" class="subnav-link active">Início</a>
+    <a href="#noticias" class="subnav-link">Notícias</a>
+    <a href="#sobre" class="subnav-link">Sobre a Empresa</a>
+    <a href="#links" class="subnav-link">Links Rápidos</a>
+    <a href="#aniversariantes" class="subnav-link">Aniversariantes</a>
+  </nav>
+
+  <!-- ═══ HERO BANNER ═════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-greeting" id="hero-greeting">Bom dia!</p>
+      <h1 class="hero-title">Bem-vindo à Intranet da Cia G3</h1>
+      <p class="hero-subtitle">Seu portal central de informações, comunicação e recursos.</p>
+      <div class="hero-date">
+        <i class="fa fa-calendar-days"></i>
+        <span id="hero-date">Carregando data…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MAIN CONTENT ════════════════════════════════════════ -->
+  <main class="main-container">
+
+    <!-- Aviso importante -->
+    <div class="announce-banner mb-4" id="announce-banner">
+      <i class="fa fa-bullhorn"></i>
+      <div>
+        <strong>Comunicado:</strong>
+        <span id="announce-text">Reunião geral da empresa na próxima sexta-feira às 15h no auditório. Presença obrigatória para todos os colaboradores.</span>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- ── Coluna Esquerda ─────────────────────────────── -->
+      <div class="col-lg-8">
+
+        <!-- Links Rápidos -->
+        <div class="sp-card mb-4" id="links">
+          <div class="sp-card-header">
+            <h2 class="sp-card-title"><i class="fa fa-bolt"></i> Links Rápidos</h2>
+            <a href="#" class="sp-card-link">Gerenciar</a>
+          </div>
+          <div class="sp-card-body">
+            <div class="quicklinks-grid" id="quicklinks-grid"></div>
+          </div>
+        </div>
+
+        <!-- Notícias -->
+        <div class="sp-card" id="noticias">
+          <div class="sp-card-header">
+            <h2 class="sp-card-title"><i class="fa fa-newspaper"></i> Notícias &amp; Comunicados</h2>
+            <a href="#" class="sp-card-link">Ver todas</a>
+          </div>
+          <div class="sp-card-body" id="news-list"></div>
+        </div>
+
+      </div><!-- /col-lg-8 -->
+
+      <!-- ── Coluna Direita ─────────────────────────────── -->
+      <div class="col-lg-4">
+
+        <!-- Aniversariantes -->
+        <div class="sp-card mb-4" id="aniversariantes">
+          <div class="sp-card-header">
+            <h2 class="sp-card-title"><i class="fa fa-cake-candles"></i> Aniversariantes do Mês</h2>
+          </div>
+          <div class="sp-card-body" id="birthday-list"></div>
+        </div>
+
+        <!-- Sobre a Empresa -->
+        <div class="sp-card" id="sobre">
+          <div class="sp-card-header">
+            <h2 class="sp-card-title"><i class="fa fa-building"></i> Cia G3</h2>
+          </div>
+          <div class="sp-card-body">
+            <p style="font-size:.85rem;color:var(--sp-text-muted);margin-bottom:16px;">
+              Empresa comprometida com inovação, qualidade e crescimento sustentável. Há mais de 20 anos entregando resultados excepcionais para nossos clientes.
+            </p>
+
+            <div class="section-label">Números da Empresa</div>
+            <div class="row g-2 mb-3" id="company-stats"></div>
+
+            <div class="section-label mt-3">Contato &amp; Informações</div>
+            <div id="company-contacts"></div>
+          </div>
+        </div>
+
+      </div><!-- /col-lg-4 -->
+
+    </div><!-- /row -->
+  </main>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
+  <footer>
+    <strong>Cia G3</strong> &nbsp;|&nbsp; Intranet Corporativa &nbsp;|&nbsp;
+    &copy; <span id="footer-year"></span> Todos os direitos reservados.
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    //  DADOS — edite aqui para personalizar o conteúdo
+    // ═══════════════════════════════════════════════════════════
+
+    // Links Rápidos
+    const quickLinks = [
+      { label: "Portal RH",        icon: "fa-users",          color: "#0078d4", href: "#" },
+      { label: "E-mail",           icon: "fa-envelope",       color: "#107c10", href: "#" },
+      { label: "Financeiro",       icon: "fa-dollar-sign",    color: "#8764b8", href: "#" },
+      { label: "Documentos",       icon: "fa-folder-open",    color: "#d83b01", href: "#" },
+      { label: "Calendário",       icon: "fa-calendar-check", color: "#038387", href: "#" },
+      { label: "Treinamentos",     icon: "fa-graduation-cap", color: "#c19c00", href: "#" },
+      { label: "Helpdesk TI",      icon: "fa-headset",        color: "#004578", href: "#" },
+      { label: "Relatórios",       icon: "fa-chart-bar",      color: "#107c10", href: "#" },
+    ];
+
+    // Notícias
+    const news = [
+      {
+        category: "Recursos Humanos",
+        title: "Programa de Reconhecimento 2025: Inscrições Abertas",
+        excerpt: "O programa valoriza colaboradores que demonstraram excelência, inovação e comprometimento ao longo do ano. As inscrições vão até o dia 28 deste mês.",
+        date: "24 Fev 2025",
+        author: "RH Cia G3",
+        icon: "fa-trophy",
+        iconColor: "#c19c00",
+      },
+      {
+        category: "Comunicado Diretoria",
+        title: "Expansão: Nova unidade em operação a partir de março",
+        excerpt: "Com grande satisfação anunciamos a inauguração da nossa nova unidade, ampliando nossa capacidade de atendimento e gerando novas oportunidades de emprego.",
+        date: "20 Fev 2025",
+        author: "Diretoria",
+        icon: "fa-building",
+        iconColor: "#0078d4",
+      },
+      {
+        category: "TI & Sistemas",
+        title: "Atualização dos Sistemas — Manutenção Programada",
+        excerpt: "No próximo domingo, das 00h às 06h, os sistemas estarão em manutenção. Planeje-se e salve seus trabalhos com antecedência.",
+        date: "18 Fev 2025",
+        author: "Equipe de TI",
+        icon: "fa-server",
+        iconColor: "#605e5c",
+      },
+      {
+        category: "Benefícios",
+        title: "Plano de Saúde: novos hospitais credenciados",
+        excerpt: "A partir de março, mais 15 hospitais e clínicas são incluídos na rede credenciada do plano de saúde corporativo. Confira a lista completa no Portal RH.",
+        date: "15 Fev 2025",
+        author: "RH Cia G3",
+        icon: "fa-heart-pulse",
+        iconColor: "#d83b01",
+      },
+    ];
+
+    // Aniversariantes — formato: { nome, departamento, dia (1-31), mes (1-12) }
+    const funcionarios = [
+      { nome: "Ana Paula Lima",      depto: "Recursos Humanos",  dia: 3,  mes: 2 },
+      { nome: "Carlos Eduardo Silva",depto: "Tecnologia da Info.",dia: 8,  mes: 2 },
+      { nome: "Fernanda Souza",      depto: "Marketing",          dia: 14, mes: 2 },
+      { nome: "Ricardo Mendes",      depto: "Financeiro",         dia: 19, mes: 2 },
+      { nome: "Juliana Costa",       depto: "Comercial",          dia: 24, mes: 2 },
+      { nome: "Marcos Rodrigues",    depto: "Operações",          dia: 27, mes: 2 },
+      // Adicione mais colaboradores conforme necessário
+      { nome: "Patrícia Alves",      depto: "Jurídico",           dia: 5,  mes: 3 },
+      { nome: "Bruno Ferreira",      depto: "Logística",          dia: 11, mes: 3 },
+    ];
+
+    // Informações da Empresa
+    const companyStats = [
+      { value: "500+",  label: "Colaboradores" },
+      { value: "20",    label: "Anos de mercado" },
+      { value: "3",     label: "Unidades" },
+      { value: "98%",   label: "Satisfação clientes" },
+    ];
+
+    const companyContacts = [
+      { icon: "fa-location-dot",  text: "Av. Paulista, 1000 — São Paulo, SP" },
+      { icon: "fa-phone",         text: "(11) 3000-0000" },
+      { icon: "fa-envelope",      text: "contato@ciag3.com.br" },
+      { icon: "fa-globe",         text: "www.ciag3.com.br" },
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    //  RENDERIZAÇÃO
+    // ═══════════════════════════════════════════════════════════
+
+    const MONTHS_PT = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+                       "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    const MONTHS_SHORT = ["Jan","Fev","Mar","Abr","Mai","Jun",
+                          "Jul","Ago","Set","Out","Nov","Dez"];
+
+    const now = new Date();
+
+    // Data e saudação no hero
+    (function setHeroDate() {
+      const weekdays = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+      document.getElementById("hero-date").textContent =
+        `${weekdays[now.getDay()]}, ${now.getDate()} de ${MONTHS_PT[now.getMonth()]} de ${now.getFullYear()}`;
+      const h = now.getHours();
+      const greet = h < 12 ? "Bom dia," : h < 18 ? "Boa tarde," : "Boa noite,";
+      document.getElementById("hero-greeting").textContent = greet;
+      document.getElementById("footer-year").textContent = now.getFullYear();
+    })();
+
+    // Quick Links
+    (function renderQuickLinks() {
+      const grid = document.getElementById("quicklinks-grid");
+      grid.innerHTML = quickLinks.map(ql => `
+        <a class="ql-item" href="${ql.href}">
+          <div class="ql-icon" style="background:${ql.color}">
+            <i class="fa-solid ${ql.icon}"></i>
+          </div>
+          <span class="ql-label">${ql.label}</span>
+        </a>
+      `).join("");
+    })();
+
+    // Notícias
+    (function renderNews() {
+      const list = document.getElementById("news-list");
+      list.innerHTML = news.map(n => `
+        <div class="news-item">
+          <div class="news-thumb" style="background:${n.iconColor}22;">
+            <i class="fa-solid ${n.icon}" style="color:${n.iconColor}"></i>
+          </div>
+          <div class="news-body">
+            <div class="news-cat">${n.category}</div>
+            <div class="news-title"><a href="#">${n.title}</a></div>
+            <div class="news-excerpt">${n.excerpt}</div>
+            <div class="news-meta">
+              <span><i class="fa fa-calendar fa-xs me-1"></i>${n.date}</span>
+              <span><i class="fa fa-user fa-xs me-1"></i>${n.author}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    })();
+
+    // Aniversariantes do mês atual
+    (function renderBirthdays() {
+      const currentMonth = now.getMonth() + 1; // 1-12
+      const currentDay   = now.getDate();
+      const monthName    = MONTHS_PT[now.getMonth()];
+
+      // Atualiza o título do card
+      document.querySelector('#aniversariantes .sp-card-title').innerHTML =
+        `<i class="fa fa-cake-candles"></i> Aniversariantes — ${monthName}`;
+
+      const avatarColors = ["#0078d4","#107c10","#8764b8","#d83b01","#038387","#c19c00","#004578","#a4262c"];
+
+      const birthdays = funcionarios
+        .filter(f => f.mes === currentMonth)
+        .sort((a, b) => a.dia - b.dia);
+
+      const list = document.getElementById("birthday-list");
+
+      if (birthdays.length === 0) {
+        list.innerHTML = `<div class="no-birthdays"><i class="fa fa-face-smile fa-2x mb-2 d-block" style="color:var(--sp-blue-light)"></i>Nenhum aniversariante este mês.</div>`;
+        return;
+      }
+
+      list.innerHTML = birthdays.map((f, i) => {
+        const isToday = f.dia === currentDay;
+        const initials = f.nome.split(" ").slice(0,2).map(w => w[0]).join("").toUpperCase();
+        const color = avatarColors[i % avatarColors.length];
+        return `
+          <div class="birthday-item${isToday ? " bday-today" : ""}">
+            <div class="bday-avatar" style="background:${color}">${initials}</div>
+            <div class="bday-info">
+              <div class="bday-name">
+                ${f.nome}
+                ${isToday ? '<span class="bday-badge">Hoje! 🎂</span>' : ""}
+              </div>
+              <div class="bday-dept">${f.depto}</div>
+            </div>
+            <div class="bday-date">
+              <div class="bday-date-day">${f.dia}</div>
+              <div class="bday-date-month">${MONTHS_SHORT[f.mes - 1]}</div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    })();
+
+    // Estatísticas da empresa
+    (function renderCompanyInfo() {
+      const statsRow = document.getElementById("company-stats");
+      statsRow.innerHTML = companyStats.map(s => `
+        <div class="col-6">
+          <div class="info-stat">
+            <div class="info-stat-value">${s.value}</div>
+            <div class="info-stat-label">${s.label}</div>
+          </div>
+        </div>
+      `).join("");
+
+      const contacts = document.getElementById("company-contacts");
+      contacts.innerHTML = companyContacts.map(c => `
+        <div class="info-contact-item">
+          <i class="fa-solid ${c.icon}"></i>
+          <span>${c.text}</span>
+        </div>
+      `).join("");
+    })();
+  </script>
+</body>
+</html>
